@@ -20,6 +20,12 @@
 		
 		String password = request.getPrameter("password");
 	-->
+	<%
+		//post방식에서 한글 안깨지게 하는 방법▼
+		//parameter 관련 메소드를 호출하기전에 호출해야 인코딩 설정이 적용된다.
+		request.setCharacterEncoding("utf-8");
+	%>
+	request method : <%=request.getMethod() %><br>
 	
 	<%
 		String userId = request.getParameter("userId");
