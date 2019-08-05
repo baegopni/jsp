@@ -6,14 +6,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
-
+	$(function(){
+		
+	})
 
 </script>
 </head>
 
 <body>
-	<input type="radio" name="mod" value="더하기">
-	<input type="radio" name="mod" value="곱하기">
+	더하기 <input type="radio" name="mod" value="더하기">
+	곱하기 <input type="radio" name="mod" value="곱하기">
 	<br><br>
 		
 	<h2>더하기</h2>
