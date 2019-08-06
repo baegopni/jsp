@@ -30,7 +30,7 @@
     		HttpSession httpSession = request.getSession();
     		UserVo userVo = (UserVo)httpSession.getAttribute("S_USERVO");
     		String userName = "";
-    		userName = userVo == null ? "" :userVo.getUserName();
+    		userName = userVo == null ? "" :userVo.getUserNm();
     		//null이면 "", null이 아니면 userVo.getUserName();
     	%>
     	사용자 이름 : <%= userName %>
