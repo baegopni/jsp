@@ -14,8 +14,6 @@
 	session : <input type="text" name="sessionParam" value="sally"><br>
 	application : <input type="text" name="applicationParam" value="cony"><br>
 	<input type="submit" value="전송">
-	
-	
 	</form>
 	
 	
