@@ -22,12 +22,12 @@
     <link href="<%=request.getContextPath()%>/css/signin.css" rel="stylesheet">
     
 	<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
-	
+	<script src="<%=request.getContextPath()%>/js/js.cookie.js"></script>
 	<script>
 	
 	$(document).ready(function(){
 		
-		var userId = getCookie("userId");
+		var userId = Cookies.get("userId");
 		if(userId != undefined)
 			$('#userId').val(userId);
 		//remember checkbox 체크
@@ -39,14 +39,13 @@
 			//체크되어있지 않으면, 기존에 사용자가 아이디를 쿠키에 저장하는 기능을 사용하다가 더이상 사용하지 않는경우
 			//처음부터 아이디 쿠키저장기능을 사용하지 않는 경우
 			if($('#remember').is(":checked") == true){
-				setCookie("userId", $("#userId").val(), 30);
+				Cookies.set("userId", $("#userId").val(), { expires : 30 });
 				
 			}else{
-				deleteCookie("userId");
+				Cookies.remove("userId");
 			}
 			//로그인 요청
 			$('#frm').submit();
-		
 		});
 	});
 	
@@ -63,20 +62,6 @@
 		return null;
 	}
 	
-	
-	//쿠키 생성
-	function setCookie(cookieNm, cookieValue, expires){
-		var dt = new Date();
-		dt.setDate( dt.getDate() + Number(expires));
-		
-		document.cookie = cookieNm + "=" + cookieValue + "; path=/; expires=" +
-							dt.toGMTString();
-	}
-	
-	//쿠키 삭제
-	function deleteCookie(cookieNm){
-		setCookie(cookieNm, "", -1);
-	}
 	</script>
   </head>
 
