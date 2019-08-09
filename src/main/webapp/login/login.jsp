@@ -20,7 +20,64 @@
 
     <!-- Custom styles for this template -->
     <link href="<%=request.getContextPath()%>/css/signin.css" rel="stylesheet">
-
+    
+	<script src="<%=request.getContextPath()%>/js/jquery-3.4.1.min.js"></script>
+	
+	<script>
+	
+	$(document).ready(function(){
+		
+		var userId = getCookie("userId");
+		if(userId != undefined)
+			$('#userId').val(userId);
+		//remember checkbox 체크
+		
+		//sign btn 클릭 이벤트 핸들러
+		$('#signBtn').on('click', function(){
+			//remember me check box가 체크가 되어있는지?
+			//체크되어있다면, userId 쿠키를 생성하고 값은 userId input의 값을 쿠키 값으로 설정
+			//체크되어있지 않으면, 기존에 사용자가 아이디를 쿠키에 저장하는 기능을 사용하다가 더이상 사용하지 않는경우
+			//처음부터 아이디 쿠키저장기능을 사용하지 않는 경우
+			if($('#remember').is(":checked") == true){
+				setCookie("userId", $("#userId").val(), 30);
+				
+			}else{
+				deleteCookie("userId");
+			}
+			//로그인 요청
+			$('#frm').submit();
+		
+		});
+	});
+	
+	
+	//cookiesString = document.cookie;
+	function getCookie(cookieId){
+		var cookies = document.cookie.split("; ");
+		for(var i=0; i<cookies.length; i++){
+			var cookies2 = cookies[i].split("=");
+			if(cookieId==(cookies2[0])){
+				return cookies2[1];
+			}
+		}
+		return null;
+	}
+	
+	
+	//쿠키 생성
+	function setCookie(cookieNm, cookieValue, expires){
+		var dt = new Date();
+		dt.setDate( dt.getDate() + Number(expires));
+		
+		document.cookie = cookieNm + "=" + cookieValue + "; path=/; expires=" +
+							dt.toGMTString();
+	}
+	
+	//쿠키 삭제
+	function deleteCookie(cookieNm){
+		setCookie(cookieNm, "", -1);
+	}
+	</script>
   </head>
 
   <body>
@@ -35,7 +92,7 @@
     	%>
     	사용자 이름 : <%= userName %>
 
-      <form class="form-signin" action="<%=request.getContextPath() %>/login" method="post">
+      <form id="frm" class="form-signin" action="<%=request.getContextPath() %>/login" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="userId" class="sr-only">userId</label>
        
@@ -47,21 +104,19 @@
         <input type="text" id="userId" name="userId" class="form-control"
         		placeholder="userId" required autofocus value="<%=userId%>">
         <label for="pass" class="sr-only">Password</label>
-        <input type="password" id="pass" name="pass" class="form-control" placeholder="Password" required value="brown1234">
+        <input type="password" id="pass" name="pass" class="form-control" placeholder="Password" required>
         <div class="checkbox">
           <label>
-            <input type="checkbox" value="remember-me"> Remember me
+            <input id="remember" type="checkbox" value="remember-me" > Remember me
           </label>
           
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button id="signBtn" class="btn btn-lg btn-primary btn-block" type="button">Sign in</button>
+        <!-- 로직을 세울땐 submit 쓰면 안됨 -->
       </form>
 
     </div> <!-- /container -->
 
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
     
