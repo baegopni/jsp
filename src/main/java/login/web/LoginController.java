@@ -23,17 +23,38 @@ public class LoginController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
  
-
+	private IUserDao userDao;
+	
+	@Override
+	public void init() throws ServletException {
+		userDao = new UserDao();
+	}
+	
+	
+	/**
+	 * 
+	 * Method   : doGet
+	 * 작성자 : PC-19
+	 * 변경이력 : 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException 
+	 * Method 설명 : 로그인 화면 요청 처리(forward)
+	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//웹브라우저가 보낸 cookie 확인
 		
 		Cookie[] cookies = request.getCookies();
-		for(Cookie cookie : cookies) {
-			logger.debug("cookie name : {}, cookie value : {}", 
-						cookie.getName(), cookie.getValue());
-	
+		if(cookies != null) {
+						for(Cookie cookie : cookies) {
+				logger.debug("cookie name : {}, cookie value : {}", 
+						cookie.getName(), cookie.getValue());	
+			}
 		}
+		
 		//응답을 생성할때 웹브라우저에게 쿠키를 저장할것을 지시
 		Cookie cookie = new Cookie("serverGen", "serverValue");
 		cookie.setMaxAge(60*60*24*7); //7일의 유효기간을 갖는 쿠키
@@ -48,12 +69,17 @@ public class LoginController extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String pass = request.getParameter("pass");
 		
+		String remember = request.getParameter("remember");
+		
+		manageUserIdCookie(response, userId, remember);
+		
+		
 		logger.debug("userId : {}", userId);
 		logger.debug("password : {}", pass);
 		
 		//사용자가 입력한 계정정보와 DB에 있는 값이랑 비교
 		//DB에서 조회해온 사용자 정보라고 가정하자.
-		IUserDao userDao = new UserDao();
+//		IUserDao userDao = new UserDao(); 위에 오버라이드
 		User user = userDao.getUser(userId);
 		
 		//사용자가 입력한 파라미터 정보와 DB에서 조회해온 값이 동일할 경우 --> webapp/main.jsp
@@ -77,6 +103,17 @@ public class LoginController extends HttpServlet {
 			//request.setAttribute("userId", userId);
 			doGet(request, response);
 		}
+	}
+
+	private void manageUserIdCookie(HttpServletResponse response, String userId, String remember) {
+		//remember 파라미터가 존재할 경우 userId를 cookie로 생성
+		Cookie cookie = new Cookie("userId", userId);
+		if(remember != null) {
+			cookie.setMaxAge(60*60*24*30); //30일
+		}else {
+			cookie.setMaxAge(0); //삭제
+		}
+		response.addCookie(cookie);
 	}
 
 }

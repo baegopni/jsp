@@ -30,6 +30,8 @@
 		var userId = Cookies.get("userId");
 		if(userId != undefined)
 			$('#userId').val(userId);
+			$('#pass').focus();
+			
 		//remember checkbox 체크
 		
 		//sign btn 클릭 이벤트 핸들러
@@ -92,7 +94,7 @@
         <input type="password" id="pass" name="pass" class="form-control" placeholder="Password" required>
         <div class="checkbox">
           <label>
-            <input id="remember" type="checkbox" value="remember-me" > Remember me
+            <input id="remember" name="remember" type="checkbox" value="remember-me" > Remember me
           </label>
           
         </div>
