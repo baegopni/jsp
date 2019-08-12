@@ -20,6 +20,8 @@
 				<li><a href="#">Settings</a></li>
 				<li><a href="#">Profile</a></li>
 				<li><a href="#">Help</a></li>
+				<li><a href="#">${S_USERVO.userNm}</a></li>
+
 				<%
 					User userVo = (User)session.getAttribute("S_USERVO");
 							String userName = "";
