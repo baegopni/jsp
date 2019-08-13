@@ -16,16 +16,16 @@ public class UserDaoTest {
 	 * 변경이력 :  
 	 * Method 설명 : getUserList테스트
 	 */
-	@Test
-	public void getUserListTest() {
-		/***Given***/ //내가 주어진 상황
-		IUserDao userDao = new UserDao();
-		
-		/***When***/
-		List<User> userList = userDao.getUserList();
-		/***Then***/ //기대하는 결과
-		assertEquals(5, userList.size());
-	}
+//	@Test
+//	public void getUserListTest() {
+//		/***Given***/ //내가 주어진 상황
+//		IUserDao userDao = new UserDao();
+//		
+//		/***When***/
+//		List<User> userList = userDao.getUserList();
+//		/***Then***/ //기대하는 결과
+//		assertEquals(5, userList.size());
+//	} 
 	
 	/**
 	 * 
@@ -47,6 +47,17 @@ public class UserDaoTest {
 		assertEquals("브라운", user.getUserNm());
 		assertEquals("brown1234", user.getPass());
 		
+	}
+	
+	@Test
+	public void getUserListOnlyHalfTest() {
+		/***Given***/
+		IUserDao userDao = new UserDao();
+
+		/***When***/
+		List<User> userListOnlyHalf = userDao.getUserListOnlyHalf();
+		/***Then***/
+		assertEquals(50, userListOnlyHalf.size());
 	}
 
 }

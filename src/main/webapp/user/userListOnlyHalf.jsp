@@ -45,30 +45,15 @@
 									<th>사용자 별명</th>
 									<th>등록일시</th>
 								</tr>
-
-<%--								<%
-									List<User> userList = (List<User>) request.getAttribute("userList");
-									for (User user : userList) { %>
+								<c:forEach items="${userListOnlyHalf }" var="user">
 								<tr>
-									<td><%=user.getUserId()%></td>
-									<td><%=user.getUserNm()%></td>
-									<td></td>
-									<td></td>
+									<td>${user.userId }</td>
+									<td>${user.userNm }</td>
+									<td>${user.alias }</td>
+									<td>${user.reg_dt_fmt }</td>
 								</tr>
-
-								<% } %>
---%>								
-
-								<%-- ★★위에 for(User user : userList) 와 동일하다 ★★--%>
-								<c:forEach items="${userList }" var="user">
-									<tr>
-										<td>${user.userId }</td>
-										<td>${user.userNm }</td>
-										<td>${user.alias }</td>
-										<td>${user.reg_dt_fmt }</td>
-									</tr>
 								</c:forEach>
-							</table>
+							</table>	
 						</div>
 
 						<a class="btn btn-default pull-right">사용자 등록</a>
@@ -81,8 +66,6 @@
 								<li><a href="#">4</a></li>
 								<li><a href="#">5</a></li>
 							</ul>
-							
-							
 						</div>
 					</div>
 				</div>

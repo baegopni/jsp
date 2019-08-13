@@ -4,5 +4,6 @@
 <ul class="nav nav-sidebar">
 	<!--  a tag : get method -->
 	<li class="active"><a href="<%=request.getContextPath()%>/userList">사용자 리스트 <span class="sr-only">(current)</span></a></li>
+	<li class="active"><a href="<%=request.getContextPath()%>/userListOnlyHalf">사용자 리스트  50명<span class="sr-only">(current)</span></a></li>
 	<li class="active"><a href="#">사용자</a></li>
 </ul>

@@ -11,4 +11,9 @@
   	select * from users
   	where userId = #{userId}
   </select>
+  
+  <select id="getUserListOnlyHalf" parameterType="String" resultType="user">
+  	select * from users
+	where rownum &lt;= 50
+  </select>
 </mapper>
