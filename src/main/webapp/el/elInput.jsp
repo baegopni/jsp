@@ -41,5 +41,7 @@
 	pageContext.removeAttribute("attr", PageContext.SESSION_SCOPE);
 %>
 	el : ${attr }<br>
+	
+	
 </body>
 </html>
