@@ -14,6 +14,8 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ch.qos.logback.core.Context;
+
 //loadOnStartup 속성 설정에 의해 /DbcpServlet으로 최초 요청이 오지 않더라도
 //서버가 가동되는 과정에서 init 메소드 호출이 이루어진다.
 @WebServlet(urlPatterns = "/DbcpServlet", loadOnStartup = 1)
@@ -30,6 +32,7 @@ public class DbcpServlet extends HttpServlet {
 	//jsp : application /  session  /     request     / pageContext(page)
 	//servlet : ??	  /request.getSession()/ request / N/A
 		ServletContext application = config.getServletContext();
+		String cp = application.getContextPath();
 		
 		//database connection pool 객체를 생성
 		BasicDataSource ds = new BasicDataSource();
@@ -40,5 +43,7 @@ public class DbcpServlet extends HttpServlet {
 		ds.setInitialSize(10);
 		
 		application.setAttribute("ds", ds);
+		application.setAttribute("cp", cp);
+		
 	}
 }

@@ -1,34 +1,30 @@
 package kr.or.ddit.lprod.model;
 
 public class LprodVo {
-	private String lprodId;
-	private String lprodGu;
-	private String lprodNm;
+	private String lprod_Id;
+	private String lprod_Gu;
+	private String lprod_Nm;
+	
+	public String getLprod_Id() {
+		return lprod_Id;
+	}
+	public void setLprod_Id(String lprod_Id) {
+		this.lprod_Id = lprod_Id;
+	}
+	public String getLprod_Gu() {
+		return lprod_Gu;
+	}
+	public void setLprod_Gu(String lprod_Gu) {
+		this.lprod_Gu = lprod_Gu;
+	}
+	public String getLprod_Nm() {
+		return lprod_Nm;
+	}
+	public void setLprod_Nm(String lprod_Nm) {
+		this.lprod_Nm = lprod_Nm;
+	}
 	
 	
-	public String getLprodId() {
-		return lprodId;
-	}
-	public void setLprodId(String lprodId) {
-		this.lprodId = lprodId;
-	}
-	public String getLprodGu() {
-		return lprodGu;
-	}
-	public void setLprodGu(String lprodGu) {
-		this.lprodGu = lprodGu;
-	}
-	public String getLprodNm() {
-		return lprodNm;
-	}
-	public void setLprodNm(String lprodNm) {
-		this.lprodNm = lprodNm;
-	}
-	
-	@Override
-	public String toString() {
-		return "LprodVo [lprodId=" + lprodId + ", lprodGu=" + lprodGu + ", lprodNm=" + lprodNm + "]";
-	}
 	
 	
 }

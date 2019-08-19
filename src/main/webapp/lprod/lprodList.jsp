@@ -20,9 +20,9 @@
 		
 		<c:forEach items="${lprodList }" var="lprod">
 		<tr>
-			<td>${lprod.lprodId }</td>
-			<td>${lprod.lprodGu }</td>
-			<td>${lprod.lprodNm }</td>	
+			<td>${lprod.lprod_Id }</td>
+			<td>${lprod.lprod_Gu }</td>
+			<td>${lprod.lprod_Nm }</td>	
 		</tr>
 		</c:forEach>
 	</table>
