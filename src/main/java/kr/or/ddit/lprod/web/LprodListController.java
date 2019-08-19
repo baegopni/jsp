@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.or.ddit.lprod.model.LprodVo;
 import kr.or.ddit.lprod.repository.LprodDao;
 
-@WebServlet("/lprod")
+@WebServlet("/lprodList")
 public class LprodListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

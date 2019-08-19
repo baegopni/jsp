@@ -1,4 +1,5 @@
-<%@page import="kr.or.ddit.user.model.User"%>
+<%@page import="kr.or.ddit.lprod.model.ProdVo"%>
+<%@page import="kr.or.ddit.lprod.model.LprodVo"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -19,28 +20,9 @@
 
 <%@ include file="/commonJsp/basicLib.jsp"%>
 
-<script>
-	$(document).ready(function(){
-		$('.userTr').on('click', function(){
-			console.log("userTr click");
-			//클릭된 tr태그의 자식태그(td)중 첫번째 자식의 텍스트 문자열
-			console.log($(this).children().first().text());
-			
-			//input태그에 값 설정
-			$('#userId').val($(this).children().first().text());
-			
-			//form 태그이용 전송
-			console.log("serialize :" + $('#frm').serialize());
-			$('#frm').submit();
-		});
-	});
-</script>
 </head>
 
 <body>
-<form id="frm" action="${cp }/user" method="get">
-	<input type="hidden" id="userId" name="userId"/>
-</form>
 	<!-- header -->
 	<%@ include file="/commonJsp/header.jsp" %>
 	<div class="container-fluid">
@@ -56,42 +38,31 @@
 
 				<div class="row">
 					<div class="col-sm-8 blog-main">
-						<h2 class="sub-header">사용자</h2>
+						<h2 class="sub-header">제품</h2>
 						<div class="table-responsive">
 							<table class="table table-striped">
 								<tr>
-									<th>사용자 아이디</th>
-									<th>사용자 이름</th>
-									<th>사용자 별명</th>
-									<th>등록일시</th>
+									<th>제품그룹명</th>
+									<th>제품그룹번호</th>
+									<th>바이어이름</th>
+									<th>제품아이디</th>
+									<th>제품명</th>
+									<th>가격</th>
 								</tr>
-
-<%--								<%
-									List<User> userList = (List<User>) request.getAttribute("userList");
-									for (User user : userList) { %>
-								<tr>
-									<td><%=user.getUserId()%></td>
-									<td><%=user.getUserNm()%></td>
-									<td></td>
-									<td></td>
-								</tr>
-
-								<% } %>
---%>								
 
 								<%-- ★★위에 for(User user : userList) 와 동일하다 ★★--%>
-								<c:forEach items="${userList }" var="user">
-									<tr class="userTr">
-										<td>${user.userId }</td>
-										<td>${user.userNm }</td>
-										<td>${user.alias }</td>
-										<td>${user.reg_dt_fmt }</td>
-									</tr>
+								<c:forEach items="${prodList }" var="prod">
+								<tr>
+										<td>${prod.lprod_nm }</td>
+										<td>${prod.lprod_gu }</td>
+										<td>${prod.buyer_name }</td>
+										<td>${prod.prod_id }</td>
+										<td>${prod.prod_name }</td>
+										<td>${prod.prod_price }</td>
+								</tr>
 								</c:forEach>
 							</table>
 						</div>
-
-						<a class="btn btn-default pull-right">사용자 등록</a>
 
 						<div class="text-center">
 							<ul class="pagination">
