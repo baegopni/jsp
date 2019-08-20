@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.session.SqlSession;
+
 import kr.or.ddit.user.model.User;
 import kr.or.ddit.user.repository.UserDao;
 
@@ -25,7 +27,7 @@ public class UserListController extends HttpServlet {
 		*/
 		
 		UserDao userDao = new UserDao();
-		List<User> userList = userDao.getUserList();
+		List<User> userList = userDao.getUserList(null);
 		
 		request.setAttribute("userList", userList);
 		request.getRequestDispatcher("/user/userList.jsp").forward(request, response);

@@ -7,12 +7,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.or.ddit.user.model.User;
 import kr.or.ddit.user.repository.IUserDao;
 import kr.or.ddit.user.repository.UserDao;
+import util.MybatisUtil;
 
 
 @WebServlet("/user")
@@ -33,7 +35,9 @@ public class UserController extends HttpServlet {
 		
 		logger.debug("userId : {}", userId);
 		
-		User user = userDao.getUser(userId);
+		SqlSession sqlSession = MybatisUtil.getSession();
+		
+		User user = userDao.getUser(sqlSession, userId);
 		
 		request.setAttribute("user", user);
 		

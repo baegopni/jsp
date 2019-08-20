@@ -9,7 +9,7 @@ import kr.or.ddit.user.model.User;
 import util.MybatisUtil;
 
 public class UserDao implements IUserDao{
-
+	
 	/** 
 	 * Method   : getUserList
 	 * 작성자 : PC-19
@@ -20,7 +20,7 @@ public class UserDao implements IUserDao{
 	
 	//주석 단축키 알트+쉬프트+j
 	@Override
-	public List<User> getUserList() {
+	public List<User> getUserList(SqlSession sqlSession) {
 		/*DB에서 조회가 되었다고 가정하고 가짜 객체를 리턴
 		List<UserVo> userList = new ArrayList<UserVo>();
 		userList.add(new UserVo("brown"));
@@ -29,10 +29,7 @@ public class UserDao implements IUserDao{
 		userList.add(new UserVo("moon"));
 		userList.add(new UserVo("james")); */
 		
-		SqlSession sqlSession = MybatisUtil.getSession();
-		List<User> userList = sqlSession.selectList("user.getUserList");
-		sqlSession.close();  
-		return userList;
+		return sqlSession.selectList("user.getUserList");
 	}
 	/**
 	 * 
@@ -44,18 +41,13 @@ public class UserDao implements IUserDao{
 	 * Method 설명 : userId를 갖는 사용자 정보 조회
 	 */
 	@Override
-	public User getUser(String userId) {
-		SqlSession sqlSession = MybatisUtil.getSession();
-		User userVo = sqlSession.selectOne("user.getUser", userId);
-		return userVo;
-	}
-	
-	@Override
-	public List<User> getUserListOnlyHalf() {
-		SqlSession sqlSession = MybatisUtil.getSession();
-		List<User> userListOnlyHalf = sqlSession.selectList("user.getUserListOnlyHalf");
-		sqlSession.close(); 
-		return userListOnlyHalf;
+	public User getUser(SqlSession sqlSession, String userId) {
+		return sqlSession.selectOne("user.getUser", userId);
 	}
 
+
+	@Override
+	public List<User> getUserListOnlyHalf(SqlSession sqlSession) {
+		return sqlSession.selectList("user.getUserListOnlyHalf");
+	}
 }

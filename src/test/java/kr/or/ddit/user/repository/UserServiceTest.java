@@ -4,41 +4,27 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import kr.or.ddit.user.model.User;
+import kr.or.ddit.user.service.IUserService;
+import kr.or.ddit.user.service.UserService;
 import util.MybatisUtil;
 
-public class UserDaoTest {
-	private static final Logger logger = LoggerFactory.getLogger(UserDaoTest.class);
+public class UserServiceTest {
+	private IUserService userService;
 	
-	private IUserDao userDao;
-	private SqlSession sqlSession;
-	
-	//junit 테스트 메소드 실행 순서
-	//@Before -> @Test -> @After
-	//@Test 테스트 메소드가 실행되기전에 @Before이 적용된 메소드를 먼저 실행하고,
-	//@Test 메소드 실행후에 @After이 적용된 메소드를 실행한다
-	
-	
-	//테스트에 공통적으로 필요한 자원을 생성/초기화
 	@Before
 	public void setup() {
-		logger.debug("before");
-		userDao = new UserDao();
-		sqlSession = MybatisUtil.getSession();
+		userService = new UserService();
 	}
 	
 	//테스트에 공통적으로 사용한 자원을 해제
 	@After
 	public void tearDown() {
-		logger.debug("after");
-		sqlSession.close();
+		
 	}
 	
 	/**
@@ -54,7 +40,7 @@ public class UserDaoTest {
 		/***Given***/ //내가 주어진 상황
 		
 		/***When***/
-		List<User> userList = userDao.getUserList(sqlSession);
+		List<User> userList = userService.getUserList();
 		
 		/***Then***/ //기대하는 결과
 		assertEquals(105, userList.size());
@@ -73,7 +59,7 @@ public class UserDaoTest {
 		String userId = "brown";
 
 		/***When***/
-		User user = userDao.getUser(sqlSession, userId);
+		User user = userService.getUser(userId);
 		
 		/***Then***/
 		assertEquals("브라운", user.getUserNm());
@@ -86,7 +72,7 @@ public class UserDaoTest {
 		/***Given***/
 
 		/***When***/
-		List<User> userListOnlyHalf = userDao.getUserListOnlyHalf(sqlSession);
+		List<User> userListOnlyHalf = userService.getUserListOnlyHalf();
 		
 		/***Then***/
 		assertEquals(50, userListOnlyHalf.size());

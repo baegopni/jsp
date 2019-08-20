@@ -1,3 +1,5 @@
+<%@page import="kr.or.ddit.user.service.UserService"%>
+<%@page import="kr.or.ddit.user.service.IUserService"%>
 <%@page import="kr.or.ddit.user.model.User"%>
 <%@page import="java.util.List"%>
 <%@page import="kr.or.ddit.user.repository.UserDao"%>
@@ -23,8 +25,8 @@
 		</tr>
 		
 		<%
-					IUserDao userDao = new UserDao();
-						List<User> list = userDao.getUserList();
+					IUserService userService = new UserService();
+						List<User> list = userService.getUserList();
 						for(int i = 0; i<list.size(); i++){
 				%>
 		<tr><td><%= list.get(i).getUserNm() %></td></tr>
