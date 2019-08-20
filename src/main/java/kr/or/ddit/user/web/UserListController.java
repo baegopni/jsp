@@ -13,11 +13,12 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.or.ddit.user.model.User;
 import kr.or.ddit.user.repository.UserDao;
+import util.MybatisUtil;
 
 @WebServlet("/userList")
 public class UserListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;      
- 
+	private SqlSession sqlSession;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*
 			-doGet
@@ -26,9 +27,10 @@ public class UserListController extends HttpServlet {
 			.userList.jsp를 통해서 화면응답을 생성하도록 위임
 		*/
 		
+		sqlSession = MybatisUtil.getSession();
 		UserDao userDao = new UserDao();
-		List<User> userList = userDao.getUserList(null);
-		
+		List<User> userList = userDao.getUserList(sqlSession);
+		sqlSession.close();
 		request.setAttribute("userList", userList);
 		request.getRequestDispatcher("/user/userList.jsp").forward(request, response);
 	}

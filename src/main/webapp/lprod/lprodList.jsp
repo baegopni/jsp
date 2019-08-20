@@ -24,7 +24,8 @@
 		$('.lprodTr').on('click', function(){
 			
 			//input태그에 값 설정
-			$('#lprod_gu').val($(this).children().eq(1).text());
+			var dataValue = $(this).data("lprod_gu");
+			$('#lprod_gu').val(dataValue);
 			
 			//form 태그이용 전송
 			$('#frm').submit();
@@ -77,7 +78,7 @@
 
 								<%-- ★★위에 for(User user : userList) 와 동일하다 ★★--%>
 								<c:forEach items="${lprodList }" var="lprod">
-								<tr class="lprodTr">
+								<tr class="lprodTr" data-lprod_Gu="${lprod.lprod_Gu }">					
 									<td>${lprod.lprod_Id }</td>
 									<td>${lprod.lprod_Gu }</td>
 									<td>${lprod.lprod_Nm }</td>	
