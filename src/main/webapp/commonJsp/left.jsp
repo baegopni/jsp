@@ -5,5 +5,8 @@
 	<!--  a tag : get method -->
 	<li class="active"><a href="${cp}/userList">사용자 리스트 <span class="sr-only">(current)</span></a></li>
 	<li class="active"><a href="${cp}/userListOnlyHalf">사용자 리스트  50명<span class="sr-only">(current)</span></a></li>
+	<li class="active"><a href="${cp}/userPagingList?page=1&pagesize=10">사용자 페이징 리스트<span class="sr-only">(current)</span></a></li>
+	
 	<li class="active"><a href="${cp}/lprodList">제품</a></li>
+	
 </ul>

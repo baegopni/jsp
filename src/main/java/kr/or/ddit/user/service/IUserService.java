@@ -1,7 +1,9 @@
 package kr.or.ddit.user.service;
 
 import java.util.List;
+import java.util.Map;
 
+import kr.or.ddit.common.model.Page;
 import kr.or.ddit.user.model.User;
 
 public interface IUserService {
@@ -38,4 +40,7 @@ public interface IUserService {
 	 * Method 설명 : 50명 사용자 리스트 조회
 	 */
 	List<User> getUserListOnlyHalf();
+
+
+	Map<String, Object> getUserPagingList(Page page);
 }

@@ -1,9 +1,12 @@
 package kr.or.ddit.user.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import kr.or.ddit.common.model.Page;
 import kr.or.ddit.user.model.User;
 import kr.or.ddit.user.repository.IUserDao;
 import kr.or.ddit.user.repository.UserDao;
@@ -40,6 +43,21 @@ public class UserService implements IUserService{
 		List<User> userList = userDao.getUserListOnlyHalf(sqlSession);
 		sqlSession.close();
 		return userList;
+	}
+
+	@Override
+	public Map<String, Object> getUserPagingList(Page page) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		SqlSession sqlSession = MybatisUtil.getSession();
+		List<User> userList = userDao.getUserPagingList(sqlSession, page);
+		int totalCnt = userDao.getUserTotalCnt(sqlSession);
+		
+		map.put("userList", userList);
+		map.put("totalCnt", totalCnt);
+		map.put("paginationSize", (int)Math.ceil( (double)totalCnt / page.getPagesize()));
+		
+		sqlSession.close();
+		return map;
 	}
 
 }
