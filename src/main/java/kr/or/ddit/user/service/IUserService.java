@@ -43,4 +43,16 @@ public interface IUserService {
 
 
 	Map<String, Object> getUserPagingList(Page page);
+	
+	
+	int deleteUser(String userId);
+	/**
+	 * 
+	 * Method   : insertUser
+	 * 작성자 : PC-19
+	 * 변경이력 : 
+	 * @param user 
+	 * Method 설명 : 사용자 등록
+	 */
+	int insertUser(User user);
 }

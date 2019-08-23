@@ -112,7 +112,7 @@
 						
 						
 						<!-- request.getParameter("page") / ${param.page } 동일 -->
-						<a class="btn btn-default pull-right">사용자 등록 page : ${param.page }</a>
+						<a href="${cp }/userForm" class="btn btn-default pull-right">사용자 등록</a>
 
 						<div class="text-center">
 							<ul class="pagination">

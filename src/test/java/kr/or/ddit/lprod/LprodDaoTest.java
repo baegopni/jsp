@@ -43,6 +43,7 @@ private static final Logger logger = LoggerFactory.getLogger(LprodDaoTest.class)
 	public void getLprodPagingListTest() {
 		/***Given***/
 		Page page = new Page();
+		page.setPage(1);
 		page.setPagesize(5);
 		
 		/***When***/

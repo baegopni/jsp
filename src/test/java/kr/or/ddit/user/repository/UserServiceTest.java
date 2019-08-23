@@ -2,9 +2,12 @@ package kr.or.ddit.user.repository;
 
 import static org.junit.Assert.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,10 +20,16 @@ import util.MybatisUtil;
 
 public class UserServiceTest {
 	private IUserService userService;
+	private SqlSession sqlSession;
+	private String userId = "brownTest";
 	
 	@Before
 	public void setup() {
 		userService = new UserService();
+		sqlSession = MybatisUtil.getSession();
+		
+		
+		userService.deleteUser(userId);
 	}
 	
 	//테스트에 공통적으로 사용한 자원을 해제
@@ -123,5 +132,29 @@ public class UserServiceTest {
 		/***Then***/
 		assertEquals(11, (int)paginationSize);
 	}
+	
+	@Test
+	public void insertUser() throws ParseException {
+		/***Given***/
+		User user = new User();
+		
+		user.setUserId(userId);
+		user.setUserNm("브라운테스트");
+		user.setPass("brownTest1234");
+		user.setReg_dt(new SimpleDateFormat("yyyy-MM-dd").parse("2019-08-08"));
+		user.setAlias("곰테스트");
+		user.setAddr1("대전광역시 중구 중앙로 76");
+		user.setAddr2("영민빌딩 2층 DDIT");
+		user.setZipcode("34940");
+
+		/***When***/
+		int insertCnt = userService.insertUser(user);
+		sqlSession.commit();
+		
+		/***Then***/
+		assertEquals(1, insertCnt);
+	}
+	
+	
 
 }
