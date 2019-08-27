@@ -94,4 +94,6 @@ public interface IUserDao {
 	 * Method 설명 : 사용자 삭제
 	 */
 	int deleteUser(SqlSession sqlSession, String userId);
+	
+	int updateUser(SqlSession sqlSession, User user);
 }

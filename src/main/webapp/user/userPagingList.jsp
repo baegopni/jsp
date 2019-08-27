@@ -20,38 +20,42 @@
 <%@ include file="/commonJsp/basicLib.jsp"%>
 
 <script>
-	$(document).ready(function(){
-		$('.userTr').on('click', function(){
-			console.log("userTr click");
-			//클릭된 tr태그의 자식태그(td)중 첫번째 자식의 텍스트 문자열
-			
-			//td태그의 텍스트가져오기(두번째 자식)
-			var tdText = $($(this).children()[1]).text();
-			console.log("tdText :" + tdText);
-			
-			//input태그에 저장된값 확인
-			var inputValue = $(this).find("input").val();
-			console.log("inputValue : " + inputValue);
-			
-			//data속성으로 값 가져오기
-			//data속성명은 항상 소문자로 치환된다
-			//data-userId --> $(this).data("userid");
-			//★대소문자 주의하기★
-			var dataValue = $(this).data("userid");
-			console.log("dataValue :" + dataValue);
-			
-			//이 밑의 코드는 실행되지않는다.
-			return false;
-			
-			//input태그에 값 설정
-			$('#userId').val(dataValue);
-			
-			//form 태그이용 전송
-			console.log("serialize :" + $('#frm').serialize());
-			$('#frm').submit();
-		});
-	});
+//문서 로딩이 완료되고 나서
+$(document).ready(function(){
+   
+   //사용자 정보 클릭시 이벤트 핸들러
+   $(".userTr").on("click", function(){
+      
+      console.log("userTr click");
+      
+      //클릭된 tr 태그의 자식태그(td)중 첫번째 자식의 텍스트 문자열
+                  
+      //td태그의 텍스트 가져오기(두번째 자식)
+      var tdText = $($(this).children()[1]).text();
+      console.log("tdText : " + tdText);
+      
+      //input태그에 저장된 값 확인
+      var inputValue = $(this).find("input").val();
+      console.log("inputValue : " + inputValue);
+      
+      //data속성으로 값 가져오기
+      //data속성명은 소문자로 치환된다!!
+      //data-userId --> $(this).data("userid");
+      //대소문자 주의!!!!!!
+      var dataValue = $(this).data("userid");
+      console.log("dataValue : " + dataValue);
+      
+      //input 태그에 값 설정
+      $("#userId").val(dataValue);
+      
+      //form 태그이용 전송
+      console.log("serialize : "  + $("#frm").serialize());
+      
+      $("#frm").submit();
+   });
+});
 </script>
+
 </head>
 
 <body>

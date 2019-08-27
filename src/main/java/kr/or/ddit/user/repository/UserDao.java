@@ -113,4 +113,10 @@ public class UserDao implements IUserDao{
 	public int deleteUser(SqlSession sqlSession, String userId) {
 		return sqlSession.delete("user.deleteUser", userId);
 	}
+	
+	
+	@Override
+	public int updateUser(SqlSession sqlSession, User user) {
+		return sqlSession.update("user.updateUser", user);
+	}
 }
