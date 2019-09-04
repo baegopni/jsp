@@ -23,6 +23,7 @@
     
 	<script src="${cp}/js/jquery-3.4.1.min.js"></script>
 	<script src="${cp}/js/js.cookie.js"></script>
+	
 	<script>
 	
 	$(document).ready(function(){

@@ -25,7 +25,7 @@
 			
 			//input태그에 값 설정
 			var dataValue = $(this).data("lprod_gu");
-			$('#lprod_gu').val(dataValue);
+			 $('#lprod_gu').val(dataValue);
 			
 			//form 태그이용 전송
 			$('#frm').submit();

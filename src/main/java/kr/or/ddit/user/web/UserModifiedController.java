@@ -49,6 +49,8 @@ public class UserModifiedController extends HttpServlet {
 		request.setCharacterEncoding("utf-8"); 
 		
 		String userId = request.getParameter("userId");
+		User original = userService.getUser(userId);
+
 		String userNm = request.getParameter("userNm");
 		String alias = request.getParameter("alias");
 		String reg_dt = request.getParameter("reg_dt");
@@ -70,6 +72,9 @@ public class UserModifiedController extends HttpServlet {
 			path = FileuploadUtil.getPath() + realFilename + ext;
 			
 			picture.write(path);
+		}else {
+			filename = original.getFilename();
+			path = original.getRealfilename();
 		}
 		
 		try {
