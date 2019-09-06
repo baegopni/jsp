@@ -29,7 +29,7 @@ public class LogoutController extends HttpServlet {
 		//SessionListener에 removeAttribute 메소드가 실행
 		
 		//로그아웃후에 로그인 화면으로 이동
-		response.sendRedirect(request.getContextPath() + "/login");
+		response.sendRedirect(request.getContextPath() + "/logout");
 		
 	}
 
